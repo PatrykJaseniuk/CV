@@ -33,7 +33,7 @@ export default function Home() {
             <p><IconMail /> <strong>patryk.jaseniuk@gmail.com</strong></p>
             <p><IconBrandLinkedin /> <a href='https://www.linkedin.com/in/patryk-jaseniuk-929136161/'>LinkedIn</a></p>
             <p><IconBrandGithub /><a href='https://github.com/PatrykJaseniuk'>GitHub</a></p>
-            <p><IconWorldWww /><a href='https://github.com/PatrykJaseniuk'>patryk.jaseniukio</a></p>
+            <p><IconWorldWww /><a href='https://patrykjaseniuk.github.io/CV/'>https://patrykjaseniuk.github.io/CV</a></p>
           </div>
         </div>
           <MarkdownViewer src={cvUrl} />
