@@ -13,34 +13,51 @@ import { vsDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import rehypeRaw from 'rehype-raw'
 import { IconBrandGithub, IconBrandLinkedin, IconGlobe, IconMail, IconMapPin, IconWorldWww } from '@tabler/icons-react'
 
-const cvUrl = 'https://raw.githubusercontent.com/PatrykJaseniuk/PatrykJaseniuk/main/README.md'
+const cvUrlPL = 'https://raw.githubusercontent.com/PatrykJaseniuk/PatrykJaseniuk/main/README_PL.md'
+const cvUrlEng = 'https://raw.githubusercontent.com/PatrykJaseniuk/PatrykJaseniuk/main/README.md'
 
 export default function Home() {
+
+  const [cvUrl, setCvUrl] = useState(cvUrlEng);
+
   return (
     <>
 
       <div className='markdown-body' >
 
-
-        <Container >  <div style={{ display: 'flex', padding: '2rem' }}>
-          <div style={{ width: '30%' }}>
-            <img style={{ borderRadius: '100%', objectFit: 'contain' }} src='https://avatars.githubusercontent.com/u/71171748?v=4' />
+        <Container  >
+          <LanguagesBar onPlClick={() => setCvUrl(cvUrlPL)} onEngClick={() => setCvUrl(cvUrlEng)} />
+          <div style={{ display: 'flex', flexWrap: 'wrap', padding: '2rem' }}>
+            <div style={{ width: '300px' }}>
+              <img style={{ borderRadius: '100%', objectFit: 'contain' }} src='https://avatars.githubusercontent.com/u/71171748?v=4' />
+            </div>
+            <div style={{ padding: '2rem' }} >
+              <h1>Patryk Jaseniuk</h1>
+              <p><IconMapPin /><strong>  Nysa, Polska</strong></p>
+              <p><IconMail /> <strong>  patryk.jaseniuk@gmail.com</strong></p>
+              <p><IconBrandLinkedin /> <a href='https://www.linkedin.com/in/patryk-jaseniuk-929136161/'>  LinkedIn</a></p>
+              <p><IconBrandGithub /><a href='https://github.com/PatrykJaseniuk'>  GitHub</a></p>
+              <p><IconWorldWww /><a href='https://patrykjaseniuk.github.io/CV/'> https://patrykjaseniuk.github.io/CV</a></p>
+            </div>
           </div>
-
-          <div style={{ padding: '2rem' }} >
-            <h1>Patryk Jaseniuk</h1>
-            <p><IconMapPin /><strong>Nysa, Polska</strong></p>
-            <p><IconMail /> <strong>patryk.jaseniuk@gmail.com</strong></p>
-            <p><IconBrandLinkedin /> <a href='https://www.linkedin.com/in/patryk-jaseniuk-929136161/'>LinkedIn</a></p>
-            <p><IconBrandGithub /><a href='https://github.com/PatrykJaseniuk'>GitHub</a></p>
-            <p><IconWorldWww /><a href='https://patrykjaseniuk.github.io/CV/'>https://patrykjaseniuk.github.io/CV</a></p>
-          </div>
-        </div>
           <MarkdownViewer src={cvUrl} />
         </Container>
         {/* <MarkdownViewer /> */}
       </div>
     </>
+  )
+}
+
+const LanguagesBar = ({ onPlClick, onEngClick }: { onPlClick: () => void, onEngClick: () => void }) => {
+  return (
+    <div style={{ display: 'flex', padding: '2rem', justifyContent: 'end', gap: '1rem' }}>
+      <button style={{ fontSize: '1.5rem' }} onClick={onPlClick}>
+        Pl 🇵🇱
+      </button>
+      <button style={{ fontSize: '1.5rem' }} onClick={onEngClick}>
+        Eng 🇬🇧
+      </button>
+    </div>
   )
 }
 
@@ -70,7 +87,7 @@ const MarkdownViewer = ({ src }: { src: string }) => {
       .then((response) => response.text())
       .then((data) => setMarkdownContent(data))
       .catch((error) => console.error(error));
-  }, []);
+  }, [src]);
 
   return (
     <ReactMarkdown

@@ -7,14 +7,15 @@
         "**/.DS_Store": false,
         "**/Thumbs.db": false,
         "**/next-env.d.ts": false,
-        "**/next.config.js": false,
+        "**/*.config.*": false,
         "**/package-lock.json": false,
         "**/package.json": false,
         "**/README.md": false,
         "**/tsconfig.json": false,
         "**/node_modules": false,
         "**/.*": false,
-        "**/yarn.lock": false
+        "**/yarn.lock": false,
+        "**/next.config.js": false
     },
     "explorerExclude.backup": {}
 }
