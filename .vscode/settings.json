@@ -17,5 +17,7 @@
         "**/yarn.lock": false,
         "**/next.config.js": false
     },
-    "explorerExclude.backup": {}
+    "explorerExclude.backup": {},
+    "CodeGPT.apiKey": "OpenAI",
+    "livePreview.serverRoot": "out"
 }
