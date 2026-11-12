@@ -1,0 +1,5 @@
+dist/
+.preview/
+.chrome-tmp/
+*.docx
+.DS_Store
