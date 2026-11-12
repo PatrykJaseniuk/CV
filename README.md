@@ -35,7 +35,20 @@ node build.mjs --pdf    # HTML + PDF  → dist/ (wymaga Chrome/Chromium)
 ```
 
 Generator obsługuje podzbiór Markdowna, którego używa CV: `#`–`###`, listy `-`,
-`**pogrubienie**`, `*kursywa*`, `` `kod` ``, `[link](https://…)` oraz `---`.
+`**pogrubienie**`, `*kursywa*`, `` `kod` ``, `[link](https://…)`.
+
+### Układ bez HTML-a w Markdownie
+
+Warstwa wizualna wynika z konwencji treści, nie z ręcznego HTML-a:
+
+| W Markdownie | Jak renderuje się |
+|---|---|
+| akapity przed pierwszym `##` | nagłówek: pierwsze 3 po lewej (imię, rola, stack), resztę kontakt układa po prawej; każdy segment „ · ” to osobna linia |
+| sekcja `## Agenci LLM` / `## LLM agents` | wyróżniony blok z pionową kreską i tłem |
+| sekcja `## Umiejętności` / `## Skills`, akapity `**Etykieta:** treść` | dwukolumnowa tabela z etykietą po lewej |
+| akapit `**W skrócie:** …` / `**At a glance:** …` | wiersz podsumowania z linią u góry |
+| `### Tytuł` + akapit z `\`technologia\` · \`technologia\` · [link]` | tytuł + linia meta z chipami |
+
 PDF powstaje przez wydruk tej samej strony w headless Chrome, więc układ zależy
 wyłącznie od `style.css` (`@media print`).
 

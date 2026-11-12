@@ -12,7 +12,7 @@ Polski — ojczysty · Angielski — B2 (swobodna praca z dokumentacją technicz
 
 Fullstack developer specjalizujący się w TypeScript: React, Next.js i Astro na froncie, Node.js i PostgreSQL/Supabase w warstwie danych, testy i CI/CD wokół całości. Piszę funkcyjnie — niemutowalne dane, funkcje wyższego rzędu. Od 2025 roku rozwijam oprogramowanie z agentami LLM: piszę kontrakty, które agent może wykonać, i bramki, których nie może obejść. Silnik fizyki w sailing-sim napisałem ręcznie, bez agenta.
 
-**W skrócie:** 25 pakietów w pipeline agenta · 200+ testów w szablonie fullstack · ~12 tys. linii TS na parys.nysa.pl
+**W skrócie:** **25** pakietów w pipeline agenta · **200+** testów w szablonie fullstack · **~12 tys.** linii TS na parys.nysa.pl
 
 ## Doświadczenie
 

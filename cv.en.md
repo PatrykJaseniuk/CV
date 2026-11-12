@@ -12,7 +12,7 @@ Polish — native · English — B2 (comfortable with technical documentation)
 
 Fullstack developer specialising in TypeScript: React, Next.js and Astro on the front end, Node.js and PostgreSQL/Supabase in the data layer, tests and CI/CD around all of it. I write functional code — immutable data, higher-order functions. Since 2025 I have been developing software with LLM agents: I write contracts an agent can execute and gates it cannot bypass. I wrote the physics engine in sailing-sim by hand, without an agent.
 
-**At a glance:** 25 packages in an agent pipeline · 200+ tests in the fullstack template · ~12k lines of TS at parys.nysa.pl
+**At a glance:** **25** packages in an agent pipeline · **200+** tests in the fullstack template · **~12k** lines of TS at parys.nysa.pl
 
 ## Experience
 
