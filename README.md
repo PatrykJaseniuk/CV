@@ -21,7 +21,13 @@ Strona: https://patrykjaseniuk.github.io/CV/
 ## PDF
 
 PDF-y nie są trzymane w repo — powstają z tych samych stron przez wydruk w
-headless Chrome (lokalnie identycznie):
+headless Chrome. Lokalnie jednym poleceniem:
+
+```bash
+./pdf.sh        # _site/Patryk_Jaseniuk_CV_PL.pdf + _site/Patryk_Jaseniuk_CV_EN.pdf
+```
+
+To samo robi CI. Ręcznie, bez skryptu:
 
 ```bash
 google-chrome --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
