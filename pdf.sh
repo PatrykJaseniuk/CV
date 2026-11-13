@@ -23,11 +23,12 @@ if [ -z "$CHROME" ]; then
   exit 1
 fi
 
-mkdir -p _site
+mkdir -p _site .preview
 cp index.html en.html style.css _site/
 
 print() {
   "$CHROME" --headless=new --disable-gpu --no-sandbox \
+    --user-data-dir="$PWD/.preview/chrome-profile" \
     --no-pdf-header-footer --virtual-time-budget=3000 \
     --print-to-pdf="$PWD/_site/$1" "file://$PWD/_site/$2"
 }

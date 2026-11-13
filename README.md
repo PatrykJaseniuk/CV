@@ -37,7 +37,7 @@ google-chrome --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
   --print-to-pdf="$PWD/_site/Patryk_Jaseniuk_CV_EN.pdf" "file://$PWD/_site/en.html"
 ```
 
-Podgląd: `_site/Patryk_Jaseniuk_CV_PL.pdf` i `..._EN.pdf`, 2 strony A4.
+Podgląd: `_site/Patryk_Jaseniuk_CV_PL.pdf` i `..._EN.pdf` — każdy ma 1 stronę A4.
 
 ## CI
 
