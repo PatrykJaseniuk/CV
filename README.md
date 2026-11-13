@@ -1,60 +1,42 @@
 # CV — Patryk Jaseniuk
 
-Źródłem prawdy jest **Markdown**. Strona i PDF-y są generowane w CI — nie ma tu
-żadnego frameworka, zależności npm ani ręcznie edytowanego HTML-a.
+Źródłem prawdy jest **HTML + CSS**. Nie ma generatora treści ani Markdowna —
+`index.html` i `en.html` to dokumenty CV, a `style.css` odpowiada za wygląd
+ekranu i wydruku A4.
 
 ```
-cv.pl.md          CV po polsku          ─┐
-cv.en.md          CV po angielsku        ├─▶ build.mjs ─▶ dist/
-style.css         wygląd (web + druk)   ─┘
-build.mjs         generator (bez zależności)
+index.html    CV po polsku
+en.html       CV po angielsku
+style.css     wygląd: ekran + @media print
 ```
-
-## Wynik (`dist/`)
-
-| Plik | Co to |
-|---|---|
-| `index.html` | strona CV PL |
-| `en.html` | strona CV EN |
-| `Patryk_Jaseniuk_CV_PL.pdf` | CV PL do wysłania |
-| `Patryk_Jaseniuk_CV_EN.pdf` | CV EN do wysłania |
 
 Strona: https://patrykjaseniuk.github.io/CV/
 
 ## Edycja
 
-1. Zmień `cv.pl.md` i/lub `cv.en.md`.
-2. `node build.mjs --pdf` (albo sam `node build.mjs` dla HTML).
-3. Commit + push — GitHub Actions robi build i publikuje `dist/` na Pages.
+1. Zmień treść bezpośrednio w `index.html` (PL) i `en.html` (EN).
+2. Układ i typografię zmieniasz w `style.css` — sekcja `@media print` rządzi PDF-em.
+3. Commit + push. GitHub Actions publikuje stronę i drukuje PDF-y.
 
-## Build
+## PDF
+
+PDF-y nie są trzymane w repo — powstają z tych samych stron przez wydruk w
+headless Chrome (lokalnie identycznie):
 
 ```bash
-node build.mjs          # tylko HTML  → dist/
-node build.mjs --pdf    # HTML + PDF  → dist/ (wymaga Chrome/Chromium)
+google-chrome --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
+  --print-to-pdf="$PWD/_site/Patryk_Jaseniuk_CV_PL.pdf" "file://$PWD/_site/index.html"
+
+google-chrome --headless=new --disable-gpu --no-sandbox --no-pdf-header-footer \
+  --print-to-pdf="$PWD/_site/Patryk_Jaseniuk_CV_EN.pdf" "file://$PWD/_site/en.html"
 ```
 
-Generator obsługuje podzbiór Markdowna, którego używa CV: `#`–`###`, listy `-`,
-`**pogrubienie**`, `*kursywa*`, `` `kod` ``, `[link](https://…)`.
-
-### Układ bez HTML-a w Markdownie
-
-Warstwa wizualna wynika z konwencji treści, nie z ręcznego HTML-a:
-
-| W Markdownie | Jak renderuje się |
-|---|---|
-| akapity przed pierwszym `##` | nagłówek: pierwsze 3 po lewej (imię, rola, stack), resztę kontakt układa po prawej; każdy segment „ · ” to osobna linia |
-| sekcja `## Agenci LLM` / `## LLM agents` | wyróżniony blok z pionową kreską i tłem |
-| sekcja `## Umiejętności` / `## Skills`, akapity `**Etykieta:** treść` | dwukolumnowa tabela z etykietą po lewej |
-| akapit `**W skrócie:** …` / `**At a glance:** …` | wiersz podsumowania z linią u góry |
-| `### Tytuł` + akapit z `\`technologia\` · \`technologia\` · [link]` | tytuł + linia meta z chipami |
-
-PDF powstaje przez wydruk tej samej strony w headless Chrome, więc układ zależy
-wyłącznie od `style.css` (`@media print`).
-
-`CHROME_BIN` pozwala wskazać przeglądarkę, jeśli `google-chrome` nie jest w PATH.
+Podgląd: `_site/Patryk_Jaseniuk_CV_PL.pdf` i `..._EN.pdf`, 2 strony A4.
 
 ## CI
 
-`.github/workflows/build.yml`: push na `main` → `node build.mjs --pdf` →
-`dist/` jako artefakt Pages → deploy.
+`.github/workflows/build.yml`: kopiuje `index.html`, `en.html`, `style.css` do
+`_site/`, drukuje dwa PDF-y i publikuje `_site/` na GitHub Pages.
+
+Strona i PDF korzystają z jednego `style.css`, więc nie ma dwóch źródeł prawdy
+o wyglądzie.

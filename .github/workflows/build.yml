@@ -1,4 +1,4 @@
-name: Build and deploy CV
+name: Deploy CV
 
 on:
   push:
@@ -21,15 +21,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+      # Strona to gotowe HTML-e + CSS — nic nie jest generowane.
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp index.html en.html style.css _site/
 
-      - name: Build HTML + PDF
-        env:
-          CHROME_BIN: /usr/bin/google-chrome
-        run: node build.mjs --pdf
+      # PDF-y powstają przez wydruk tych samych stron (Chrome jest na runnerze).
+      - name: Print PDFs
+        run: |
+          chrome() {
+            google-chrome --headless=new --disable-gpu --no-sandbox \
+              --no-pdf-header-footer --virtual-time-budget=3000 "$@"
+          }
+          chrome --print-to-pdf="$PWD/_site/Patryk_Jaseniuk_CV_PL.pdf" \
+            "file://$PWD/_site/index.html"
+          chrome --print-to-pdf="$PWD/_site/Patryk_Jaseniuk_CV_EN.pdf" \
+            "file://$PWD/_site/en.html"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -37,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: _site
 
   deploy:
     needs: build

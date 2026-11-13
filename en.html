@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patryk Jaseniuk — CV (EN)</title>
+<meta name="description" content="Patryk Jaseniuk's CV — Fullstack TypeScript Developer.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="switcher"><a href="index.html">PL</a><a href="en.html" class="active">EN</a><a href="Patryk_Jaseniuk_CV_EN.pdf">PDF</a></nav>
+<header class="cv-header">
+<div class="identity">
+<h1>Patryk Jaseniuk</h1>
+<p><strong>Fullstack (Full Stack) TypeScript Developer</strong></p>
+<p>React · Node · LLM agents · functional programming</p>
+</div>
+<div class="contact">
+<p>Wrocław, Poland (remote or hybrid)</p>
+<p>patryk.jaseniuk@gmail.com</p>
+<p><a href="https://www.linkedin.com/in/patryk-jaseniuk-929136161/">linkedin.com/in/patryk-jaseniuk</a></p>
+<p><a href="https://github.com/PatrykJaseniuk">github.com/PatrykJaseniuk</a></p>
+<p>Polish — native</p>
+<p>English — B2 (comfortable with technical documentation)</p>
+</div>
+</header>
+<main>
+<h2>Profile</h2>
+<p>Fullstack developer specialising in TypeScript: React, Next.js and Astro on the front end, Node.js and PostgreSQL/Supabase in the data layer, tests and CI/CD around all of it. I write functional code — immutable data, higher-order functions. Since 2025 I have been developing software with LLM agents: I write contracts an agent can execute and gates it cannot bypass. I wrote the physics engine in sailing-sim by hand, without an agent.</p>
+<p class="highlights"><strong>At a glance:</strong> <strong>25</strong> packages in an agent pipeline · <strong>200+</strong> tests in the fullstack template · <strong>~12k</strong> lines of TS at parys.nysa.pl</p>
+<h2>Experience</h2>
+<h3>Fullstack / Frontend Developer — own projects and client work</h3>
+<p><em>2022 – present</em></p>
+<ul><li>Design and ship web applications end to end: data model, API and access layer, UI, tests, CI/CD, release.</li><li>Maintain them after launch — database migrations, dependency updates, Lighthouse audits, accessibility fixes.</li><li>Work directly with the product owner: gather requirements, scope the work and deliver releases on my own.</li><li>Develop projects with LLM agents: contracts in <code>AGENTS.md</code>, MCP, skills, verification through tests and CI.</li></ul>
+<h2>Projects</h2>
+<h3>ts-fullstack-template — fullstack application template on React + Supabase</h3>
+<p><em>2026</em> · <code>React 18</code> · <code>TypeScript</code> · <code>Vite</code> · <code>TanStack Router/Query</code> · <code>Supabase</code> · <code>PostgreSQL RLS</code> · <code>Vitest</code> · <code>Playwright</code> · <code>pgTAP</code> · <a href="https://github.com/PatrykJaseniuk/ts-fullstack-template">Code</a></p>
+<p>A fullstack template with no custom server: the browser talks to Supabase directly, and PostgreSQL Row Level Security is the only authorization layer.</p>
+<ul><li>Designed and wrote the backend: 7 tables, 30 RLS policies, 10 <code>security_invoker</code> views, triggers and helper functions; the user role lands in a non-editable JWT claim via <code>custom_access_token_hook</code>.</li><li>Split the frontend into <code>pages</code> → <code>masterComponents</code> → <code>slaveComponents</code> → <code>generic</code> layers and enforced import rules in ESLint; the functional style (no mutation, <code>fp-ts</code>, <code>zod</code>, <code>ts-pattern</code>) is enforced by <code>eslint-plugin-functional</code>.</li><li>Built the test pyramid (200+ Vitest cases, 15 stories with a11y, Playwright, 14 pgTAP files) and CI in GitHub Actions: 7 jobs from lint to Pages deployment.</li></ul>
+<h3>pkg-builder — a package-building workspace driven by an LLM agent</h3>
+<p><em>2026</em> · <code>Bash</code> · <code>AGENTS.md</code> · <code>DSH</code> · <code>Linux</code> · <code>XDG</code> · <a href="https://github.com/PatrykJaseniuk/pkg-builder">Code</a></p>
+<p>A project where an LLM agent takes software from its repository all the way to a working application: 25 packages delivered as working launchers (Blender, GIMP, Unreal Engine, Wine/DXVK, PostgreSQL, ffmpeg, among others) — from source builds to pinned binaries.</p>
+<ul><li>Wrote <code>AGENTS.md</code> as a self-sufficient seed: an empty directory plus that file is enough for the agent to recreate the whole workspace, generate the scripts and run a health check.</li><li>Designed a functional model instead of a checklist: a DAG of values (<code>repo → source → build</code>) and the functions that produce them; values are immutable, generators atomic and idempotent, and a fix is a new value — never an in-place edit.</li><li>Enforced auditability: 55 scripts with mandatory contract headers (<code>produces</code>, <code>consumes</code>, <code>deps</code>, <code>pinned</code>), 62 reports as process memory, a consistency lint, tag and SHA pinning, and no privilege escalation.</li><li>Result: 8 native launchers (<code>bin/</code> + XDG menu) — including DSH itself, built with this very workspace.</li></ul>
+<h3>parys-web — website and typed data model for Sport Studio Parys</h3>
+<p><em>2026</em> · <code>Astro 5</code> · <code>TypeScript</code> · <code>Tailwind CSS 4</code> · <code>Pages CMS</code> · <code>GitHub Actions</code> · <a href="https://github.com/PatrykJaseniuk/parys-web">Code</a> · <a href="https://parys.nysa.pl">Live</a></p>
+<p>A gym website (memberships, zones, classes, trainers, contact) built around a single typed data model — roughly 12k lines of TypeScript and Astro.</p>
+<ul><li>Designed a layered architecture where the directory number defines the allowed import direction; the model core has no external dependencies and feeds two products: the website and an A4 price list (PDF + HTML).</li><li>Built the CMS: JSON files edited in Pages CMS are validated and generated into typed modules, and a GitHub Actions workflow commits the model and detects drift in CI.</li><li>Added a quality gate on every build (entity-to-file bindings, asset existence, version compatibility, publication lock) plus a Lighthouse audit; deployed to GitHub Pages on a custom domain.</li></ul>
+<h3>sailing-sim — physics engine and 2D sailing simulator</h3>
+<p><em>2022 – 2024</em> · <code>TypeScript</code> · <code>Next.js</code> · <code>Three.js</code> · <code>Jest</code> · <code>GitHub Actions</code> · <a href="https://github.com/PatrykJaseniuk/sailing-sim">Code</a> · <a href="https://patrykjaseniuk.github.io/StatkiTSDocs/">Docs</a></p>
+<p><strong>Written entirely by hand — no LLM agent involved.</strong> A real-time simulator: the player controls sails and rudder, and the ship moves under forces generated by wind and water.</p>
+<ul><li>Built my own physics engine in plain TypeScript (no off-the-shelf physics library): hull and sails as triangle bodies connected by springs (soft body), aerodynamic and hydrodynamic forces, friction, collisions and rotational motion.</li><li>Designed the simulation loop with a fixed integration step and a separation between world elements and the view layer; rendering based on Three.js.</li><li>Covered the engine with 55 unit tests across 13 suites (Jest) and documented the model in 13 chapters of technical documentation.</li></ul>
+<h2>LLM agents</h2>
+<div class="callout"><ul><li><strong>Spec-driven development:</strong> in ts-fullstack-template and parys-web I keep <code>AGENTS.md</code> as the single source of rules for humans and agents (700 lines); in pkg-builder it is a self-sufficient seed of the whole workspace. Types, lint and CI enforce those rules regardless of who writes the code.</li><li><strong>Agent loop:</strong> plan → generation → verification → report. I enforce atomicity and idempotency, pinned inputs and an audit trail for every operation — the agent gets a repeatable, checkable process instead of a series of improvisations.</li><li><strong>Content-editor agent architecture</strong> (spec in parys-web): an LLM plus the Telegram Bot API edits the repository through a file allow-list, on a branch and through a PR, with <code>astro check</code> and build gates, human approval in chat and a container per repository.</li><li><strong>Tooling:</strong> I configure MCP (Storybook <code>addon-mcp</code>, Supabase MCP, editor MCP servers) and use agent skills (<code>SKILL.md</code>) as a carrier for domain knowledge.</li><li><strong>Verification over trust:</strong> I check every agent change with tests, types and CI; the agent does not publish without green gates — that is the condition for safe autonomy.</li><li><strong>Preferred agent stack:</strong> DSH (my favourite harness), DeepSeek v4.1-Flash, Qwen 3.8 locally.</li></ul></div>
+<h2>Skills</h2>
+<dl class="skills"><div class="row"><dt>Languages</dt><dd>TypeScript, JavaScript (ES2022+), SQL, Python, Bash, C/C++, Java, C#</dd></div><div class="row"><dt>Paradigm</dt><dd>functional programming — immutable data, higher-order functions, composition, no side effects; <code>fp-ts</code>, <code>zod</code>, <code>ts-pattern</code>, <code>eslint-plugin-functional</code></dd></div><div class="row"><dt>Frontend</dt><dd>React 18, Next.js, Astro 5, TanStack Router and Query, Tailwind CSS, HTML/CSS, Three.js, Pixi.js, Storybook</dd></div><div class="row"><dt>Backend and data</dt><dd>Node.js, Supabase, PostgreSQL (RLS, views, triggers, pgTAP), PostgREST, REST API, Prisma</dd></div><div class="row"><dt>LLM agents</dt><dd>spec-driven development, <code>AGENTS.md</code>, MCP, agent skills, DSH, DeepSeek v4.1-Flash, Qwen 3.8 (local), agent loop and guardrail design, human-in-the-loop, verification through tests and CI</dd></div><div class="row"><dt>Testing and quality</dt><dd>Vitest, Jest, React Testing Library, Playwright, Storybook a11y, Lighthouse, TDD</dd></div><div class="row"><dt>Tooling</dt><dd>Git, GitHub Actions, Vite, Docker, Make, ESLint, Pages CMS</dd></div></dl>
+<h2>Education</h2>
+<p><strong>Computer Science — University of Applied Sciences in Nysa (PANS)</strong> <em>2019 – 2023</em></p>
+<p>Algorithms and data structures · object-oriented programming · databases and SQL · computer networks · software engineering.</p>
+<p><em>I agree to the processing of my personal data for the purposes of the recruitment process, in accordance with Regulation (EU) 2016/679 (GDPR).</em></p>
+</main>
+</body>
+</html>
