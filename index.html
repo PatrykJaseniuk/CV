@@ -28,7 +28,7 @@
 <h2>Wybrane projekty własne</h2>
 <article class="project">
 <h3>parys — strona web i materiały drukowane dla siłowni generowane z jednego źródła</h3>
-<p class="project-meta"><em>2026</em> · Projekt komercyjny · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · <span class="project-links"><a href="https://parys.nysa.pl">Wdrożenie</a> · <a href="https://github.com/PatrykJaseniuk/parys-web">Kod</a></span></p>
+<p class="project-meta"><em>2026</em> · Projekt komercyjny · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · <span class="project-links"><a href="https://parys.nysa.pl">strona</a> · <a href="https://github.com/PatrykJaseniuk/parys-web/releases/tag/cennik">drukowalne</a> · <a href="https://github.com/PatrykJaseniuk/parys-web">Kod</a></span></p>
 <ul>
 <li>Zdefiniowano ustrukturyzowany model biznesowy jako jedyne źródło prawdy: strefy, karnety, zajęcia, trenerzy i usługi zapisane w JSON; strona i materiały drukowane generowane z tego modelu.</li>
 <li>Edycja danych przez Pages CMS — CMS oparty na gicie i GitHub Actions.</li>
@@ -42,19 +42,20 @@
 <ul>
 <li>CI/CD: GitHub Actions na push i PR do <code>main</code>, 7 zadań (lint, typy, <code>tsc</code>, Vitest, deploy) — frontend na GitHub Pages, backend na Supabase; lokalny cykl przez <code>Makefile</code>.</li>
 <li>Backend: Supabase (Postgres + PostgREST): 7 tabel, 12 kluczy obcych, 7 typów ENUM, 12 ograniczeń CHECK/UNIQUE, 13 funkcji, 15 triggerów, 30 polityk RLS. Claim <code>user_role</code> z <code>custom_access_token_hook</code>; role admin/landlord/tenant; 10 widoków <code>security_invoker</code> (salda i wyciągi na funkcjach okna); typowane API <code>createClient&lt;Database&gt;</code>.</li>
-<li>Frontend: React 18 + Vite, TanStack Router (hash history) i Query; warstwy pages → masterComponents → slaveComponents z bezdomenowym <code>generic/</code>. Hooki list/CRUD: debounce 300 ms, sortowanie, paginacja PostgREST (<code>.range()</code>, 20 wierszy); cache <code>staleTime</code> 30 s, invalidacja po mutacjach.</li>
+<li>Frontend: React 18 + Vite, TanStack Router (hash history) i Query; Komponenty podzielone na warstwy zależności. Hooki list/CRUD: debounce 300 ms, sortowanie, paginacja PostgREST (<code>.range()</code>, 20 wierszy); cache <code>staleTime</code> 30 s, invalidacja po mutacjach.</li>
 <li>LLM: reguły z <code>AGENTS.md</code> egzekwowane przez ESLint (<code>functional/*</code>, zakaz <code>if</code>/<code>switch</code>/<code>enum</code>/<code>let</code>/<code>throw</code>, granice importów, <code>no-floating-promises</code>) i strict TS (<code>noUncheckedIndexedAccess</code>).</li>
 <li>245 testów Vitest (29 plików), 8 E2E, 13 pgTAP, 15 Storybook (21 <code>play</code>, a11y).</li>
 </ul>
 </article>
 
 <article class="project">
-<h3>pkg-builder — system budowania oprogramowania z kodu źródłowego oparty na agencie LLM</h3>
+<h3>pkg-builder — agent LLM jako menedżer pakietów budujący z kodu źródłowego</h3>
 <p class="project-meta"><em>2026</em> · AGENTS.md · agenci LLM · spec-driven development · DAG · <span class="project-links"><a href="https://github.com/PatrykJaseniuk/pkg-builder/blob/main/AGENTS.md">AGENTS.md</a></span></p>
 <ul>
-<li>Agent zdefiniowany w całości w <code>AGENTS.md</code>; pisze wyłącznie w <code>functions/</code>, a artefakty pakietu (<code>values/</code>) są tylko do odczytu.</li>
-<li>Warstwy 0-repogit → 1-source → 2-build generują artefakty, a 3-launch uruchamia proces.</li>
-<li>Budowa rekurencyjna: brakująca zależność → instalacja → kolejne warstwy, aż do właściwej konfiguracji i kompletu zależności.</li>
+<li>Agent zdefiniowany w całości w <code>AGENTS.md</code>.</li>
+<li>Użytkownik przesyła żądanie instalacji danego oprogramowania, a agent wykonuje zadanie zaczynając od sklonowania repo git przez budowanie, rekurencyjnie instalowanie zależności, aż po skrypt uruchamiający oprogramowanie z odpowiednią konfiguracją.</li>
+<li>Cały proces instalacji jest podzielony na warstwy, agent wypełnia kolejne warstwy iteracyjnie aż do skutku, generuje raporty i zapisuje zależności jako wiedzę na przyszłość.</li>
+<li>Instalacja pakietów z kodu źródłowego daje ogromną możliwość modyfikacji.</li>
 </ul>
 </article>
 
@@ -72,10 +73,10 @@
 <div class="row"><dt>Frontend</dt><dd>React 18, Next.js, Astro 5, TanStack Router i Query, Tailwind CSS, HTML/CSS, Three.js, Storybook</dd></div>
 <div class="row"><dt>Backend i dane</dt><dd>Node.js, PostgreSQL, Supabase, REST API, PostgREST, RLS, widoki, triggery, pgTAP</dd></div>
 <div class="row"><dt>Testy i CI/CD</dt><dd>Vitest, Jest, React Testing Library, Playwright, Storybook a11y, GitHub Actions, Lighthouse</dd></div>
-<div class="row"><dt>Agenci LLM</dt><dd>spec-driven development, AGENTS.md, MCP, SKILL.md, human-in-the-loop, weryfikacja przez testy i CI</dd></div>
-<div class="row"><dt>Języki i narzędzia</dt><dd>TypeScript, JavaScript (ES2022+), SQL, Bash, Python · Git, Docker, Vite, ESLint, Linux, Make</dd></div>
+<div class="row"><dt>Agenci LLM</dt><dd>spec-driven development, AGENTS.md, MCP, SKILL.md, local llm, llama.cpp</dd></div>
+<div class="row"><dt>Języki formalne i&nbsp;narzędzia</dt><dd>TypeScript, JavaScript (ES2022+), SQL, Bash, Python, C, C++, Java · Git, Docker, Vite, ESLint, Linux, Make</dd></div>
 </dl>
-<p class="languages"><strong>Języki obce:</strong> polski — ojczysty · angielski — B2 (swobodna praca z dokumentacją techniczną)</p>
+<p class="languages"><strong>Języki naturalne:</strong> polski — ojczysty · angielski — B2 (swobodna praca z dokumentacją techniczną)</p>
 
 <h2>Edukacja</h2>
 <div class="education">

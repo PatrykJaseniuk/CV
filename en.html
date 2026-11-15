@@ -28,7 +28,7 @@
 <h2>Selected personal projects</h2>
 <article class="project">
 <h3>parys — gym website and print materials generated from a single source</h3>
-<p class="project-meta"><em>2026</em> · Commercial project · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · <span class="project-links"><a href="https://parys.nysa.pl">Live</a> · <a href="https://github.com/PatrykJaseniuk/parys-web">Code</a></span></p>
+<p class="project-meta"><em>2026</em> · Commercial project · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · <span class="project-links"><a href="https://parys.nysa.pl">site</a> · <a href="https://github.com/PatrykJaseniuk/parys-web/releases/tag/cennik">printables</a> · <a href="https://github.com/PatrykJaseniuk/parys-web">Code</a></span></p>
 <ul>
 <li>Defined a structured business model as the single source of truth: zones, memberships, classes, trainers and services stored as JSON; website and print materials are generated from it.</li>
 <li>Content edited via Pages CMS — a git- and GitHub Actions-based CMS.</li>
@@ -42,19 +42,20 @@
 <ul>
 <li>CI/CD: GitHub Actions on push and PR to <code>main</code>, 7 jobs (lint, types, <code>tsc</code>, Vitest, deploy) — frontend on GitHub Pages, backend on Supabase; local loop via <code>Makefile</code>.</li>
 <li>Backend: Supabase (Postgres + PostgREST): 7 tables, 12 foreign keys, 7 enum types, 12 CHECK/UNIQUE constraints, 13 functions, 15 triggers, 30 RLS policies. <code>user_role</code> claim from <code>custom_access_token_hook</code>; admin/landlord/tenant roles; 10 <code>security_invoker</code> views (balances and statements on window functions); typed API <code>createClient&lt;Database&gt;</code>.</li>
-<li>Frontend: React 18 + Vite, TanStack Router (hash history) and Query; layered pages → masterComponents → slaveComponents with a domain-free <code>generic/</code>. List/CRUD hooks: 300 ms debounce, sorting, PostgREST pagination (<code>.range()</code>, 20 rows); cache <code>staleTime</code> 30 s, invalidation after mutations.</li>
+<li>Frontend: React 18 + Vite, TanStack Router (hash history) and Query; components divided into dependency layers. List/CRUD hooks: 300 ms debounce, sorting, PostgREST pagination (<code>.range()</code>, 20 rows); cache <code>staleTime</code> 30 s, invalidation after mutations.</li>
 <li>LLM: rules from <code>AGENTS.md</code> enforced by ESLint (<code>functional/*</code>, no <code>if</code>/<code>switch</code>/<code>enum</code>/<code>let</code>/<code>throw</code>, import boundaries, <code>no-floating-promises</code>) and strict TS (<code>noUncheckedIndexedAccess</code>).</li>
 <li>245 Vitest tests (29 files), 8 E2E, 13 pgTAP, 15 Storybook (21 <code>play</code>, a11y).</li>
 </ul>
 </article>
 
 <article class="project">
-<h3>pkg-builder — source-to-software build system driven by an LLM agent</h3>
+<h3>pkg-builder — an LLM agent as a package manager building from source</h3>
 <p class="project-meta"><em>2026</em> · AGENTS.md · LLM agents · spec-driven development · DAG · <span class="project-links"><a href="https://github.com/PatrykJaseniuk/pkg-builder/blob/main/AGENTS.md">AGENTS.md</a></span></p>
 <ul>
-<li>The agent is defined entirely in <code>AGENTS.md</code>; it writes only inside <code>functions/</code>, while package artifacts (<code>values/</code>) are read-only.</li>
-<li>Layers 0-repogit → 1-source → 2-build produce artifacts, and 3-launch launches the process.</li>
-<li>Recursive builds: missing dependency → install → next layers, until the right configuration and complete dependency set are found.</li>
+<li>The agent is defined entirely in <code>AGENTS.md</code>.</li>
+<li>The user submits a request to install given software, and the agent carries out the task — from cloning the git repo, through building and recursively installing dependencies, to a launch script that runs the software with the right configuration.</li>
+<li>The whole installation is split into layers; the agent fills successive layers iteratively until done, generates reports and records dependencies as knowledge for the future.</li>
+<li>Building packages from source gives enormous room for modification.</li>
 </ul>
 </article>
 
@@ -72,10 +73,10 @@
 <div class="row"><dt>Frontend</dt><dd>React 18, Next.js, Astro 5, TanStack Router and Query, Tailwind CSS, HTML/CSS, Three.js, Storybook</dd></div>
 <div class="row"><dt>Backend &amp; data</dt><dd>Node.js, PostgreSQL, Supabase, REST API, PostgREST, RLS, views, triggers, pgTAP</dd></div>
 <div class="row"><dt>Testing &amp; CI/CD</dt><dd>Vitest, Jest, React Testing Library, Playwright, Storybook a11y, GitHub Actions, Lighthouse</dd></div>
-<div class="row"><dt>LLM agents</dt><dd>spec-driven development, AGENTS.md, MCP, SKILL.md, human-in-the-loop, verification through tests and CI</dd></div>
-<div class="row"><dt>Languages &amp; tools</dt><dd>TypeScript, JavaScript (ES2022+), SQL, Bash, Python · Git, Docker, Vite, ESLint, Linux, Make</dd></div>
+<div class="row"><dt>LLM agents</dt><dd>spec-driven development, AGENTS.md, MCP, SKILL.md, local LLM, llama.cpp</dd></div>
+<div class="row"><dt>Formal languages &amp;&nbsp;tools</dt><dd>TypeScript, JavaScript (ES2022+), SQL, Bash, Python, C, C++, Java · Git, Docker, Vite, ESLint, Linux, Make</dd></div>
 </dl>
-<p class="languages"><strong>Languages:</strong> Polish — native · English — B2 (comfortable with technical documentation)</p>
+<p class="languages"><strong>Natural languages:</strong> Polish — native · English — B2 (comfortable with technical documentation)</p>
 
 <h2>Education</h2>
 <div class="education">

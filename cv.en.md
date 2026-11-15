@@ -16,7 +16,7 @@ Full Stack TypeScript Developer: React, Next.js, Astro and PostgreSQL/Supabase. 
 
 ### parys — gym website and print materials generated from a single source
 
-*2026* · Commercial project · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · [Live](https://parys.nysa.pl) · [Code](https://github.com/PatrykJaseniuk/parys-web)
+*2026* · Commercial project · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · [site](https://parys.nysa.pl) · [printables](https://github.com/PatrykJaseniuk/parys-web/releases/tag/cennik) · [Code](https://github.com/PatrykJaseniuk/parys-web)
 
 - Defined a structured business model as the single source of truth: zones, memberships, classes, trainers and services stored as JSON; website and print materials are generated from it.
 - Content edited via Pages CMS — a git- and GitHub Actions-based CMS.
@@ -28,17 +28,18 @@ Full Stack TypeScript Developer: React, Next.js, Astro and PostgreSQL/Supabase. 
 
 - CI/CD: GitHub Actions on push and PR to `main`, 7 jobs (lint, types, `tsc`, Vitest, deploy) — frontend on GitHub Pages, backend on Supabase; local loop via `Makefile`.
 - Backend: Supabase (Postgres + PostgREST): 7 tables, 12 foreign keys, 7 enum types, 12 CHECK/UNIQUE constraints, 13 functions, 15 triggers, 30 RLS policies. `user_role` claim from `custom_access_token_hook`; admin/landlord/tenant roles; 10 `security_invoker` views (balances and statements on window functions); typed API `createClient<Database>`.
-- Frontend: React 18 + Vite, TanStack Router (hash history) and Query; layered pages → masterComponents → slaveComponents with a domain-free `generic/`. List/CRUD hooks: 300 ms debounce, sorting, PostgREST pagination (`.range()`, 20 rows); cache `staleTime` 30 s, invalidation after mutations.
+- Frontend: React 18 + Vite, TanStack Router (hash history) and Query; components divided into dependency layers. List/CRUD hooks: 300 ms debounce, sorting, PostgREST pagination (`.range()`, 20 rows); cache `staleTime` 30 s, invalidation after mutations.
 - LLM: rules from `AGENTS.md` enforced by ESLint (`functional/*`, no `if`/`switch`/`enum`/`let`/`throw`, import boundaries, `no-floating-promises`) and strict TS (`noUncheckedIndexedAccess`).
 - 245 Vitest tests (29 files), 8 E2E, 13 pgTAP, 15 Storybook (21 `play`, a11y).
 
-### pkg-builder — source-to-software build system driven by an LLM agent
+### pkg-builder — an LLM agent as a package manager building from source
 
 *2026* · AGENTS.md · LLM agents · spec-driven development · DAG · [AGENTS.md](https://github.com/PatrykJaseniuk/pkg-builder/blob/main/AGENTS.md)
 
-- The agent is defined entirely in `AGENTS.md`; it writes only inside `functions/`, while package artifacts (`values/`) are read-only.
-- Layers 0-repogit → 1-source → 2-build produce artifacts, and 3-launch launches the process.
-- Recursive builds: missing dependency → install → next layers, until the right configuration and complete dependency set are found.
+- The agent is defined entirely in `AGENTS.md`.
+- The user submits a request to install given software, and the agent carries out the task — from cloning the git repo, through building and recursively installing dependencies, to a launch script that runs the software with the right configuration.
+- The whole installation is split into layers; the agent fills successive layers iteratively until done, generates reports and records dependencies as knowledge for the future.
+- Building packages from source gives enormous room for modification.
 
 ### sailing-sim — physics engine and 2D sailing simulator
 
@@ -55,11 +56,11 @@ Full Stack TypeScript Developer: React, Next.js, Astro and PostgreSQL/Supabase. 
 
 **Testing & CI/CD:** Vitest, Jest, React Testing Library, Playwright, Storybook a11y, GitHub Actions, Lighthouse
 
-**LLM agents:** spec-driven development, AGENTS.md, MCP, SKILL.md, human-in-the-loop, verification through tests and CI
+**LLM agents:** spec-driven development, AGENTS.md, MCP, SKILL.md, local LLM, llama.cpp
 
-**Languages & tools:** TypeScript, JavaScript (ES2022+), SQL, Bash, Python · Git, Docker, Vite, ESLint, Linux, Make
+**Formal languages & tools:** TypeScript, JavaScript (ES2022+), SQL, Bash, Python, C, C++, Java · Git, Docker, Vite, ESLint, Linux, Make
 
-**Languages:** Polish — native · English — B2 (comfortable with technical documentation)
+**Natural languages:** Polish — native · English — B2 (comfortable with technical documentation)
 
 ## Education
 
