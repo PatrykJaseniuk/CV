@@ -25,41 +25,42 @@
 <h2>Profile</h2>
 <p class="profile">Full Stack TypeScript Developer: React, Next.js, Astro and PostgreSQL/Supabase. Favourite paradigm: functional programming — immutability, function composition and controlled side effects. Since 2022 I have been building end-to-end applications with tests and CI/CD; with LLM agents, I work spec-driven and verify changes through typing and tests.</p>
 
-<h2>Experience</h2>
-<article class="experience">
-<h3>Frontend Developer (Astro / TypeScript) — commercial gym website and price list</h3>
-<p class="project-meta"><em>2026</em> · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · <span class="project-links"><a href="https://parys.nysa.pl">Live</a> · <a href="https://github.com/PatrykJaseniuk/parys-web">Code</a></span></p>
+<h2>Selected personal projects</h2>
+<article class="project">
+<h3>parys — gym website and print materials generated from a single source</h3>
+<p class="project-meta"><em>2026</em> · Commercial project · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · <span class="project-links"><a href="https://parys.nysa.pl">Live</a> · <a href="https://github.com/PatrykJaseniuk/parys-web">Code</a></span></p>
 <ul>
-<li>Working directly with the owner, I designed and shipped a static gym website and an A4 price list in PDF and HTML, deployed to GitHub Pages on a custom domain.</li>
-<li>Defined a structured business model as the single source of truth: training zones, memberships, classes, trainers and services are described once, with both the website and print assets generated from the same model.</li>
-<li>Git/JSON CMS with no database, backend or related operating costs; CI validation. Lighthouse: 100/100/100/100.</li>
+<li>Defined a structured business model as the single source of truth: zones, memberships, classes, trainers and services stored as JSON; website and print materials are generated from it.</li>
+<li>Content edited via Pages CMS — a git- and GitHub Actions-based CMS.</li>
+<li>No server: fully static, lightweight and fast site; zero running costs; CI validation. Lighthouse: 100/100/100/100.</li>
 </ul>
 </article>
 
-<h2>Personal projects</h2>
 <article class="project">
-<h3>ts-fullstack-template — React + Supabase application template</h3>
+<h3>ts-fullstack-template — fullstack app in a business domain: rental-property management</h3>
 <p class="project-meta"><em>2026</em> · React 18 · TypeScript · TanStack Router/Query · PostgreSQL RLS · Vitest · Playwright · <span class="project-links"><a href="https://patrykjaseniuk.github.io/ts-fullstack-template/">Live</a> · <a href="https://github.com/PatrykJaseniuk/ts-fullstack-template">Code</a></span></p>
 <ul>
-<li>Typed Supabase/PostgREST API: createClient&lt;Database&gt;, schema-generated table, view, Insert/Update and enum types. RBAC with 30 RLS policies, admin/landlord/tenant roles and a JWT claim; 10 security_invoker views, including running balances from SQL window functions.</li>
-<li>AGENTS.md rules for LLM agents are enforced by ESLint and strict TS: functional/*, import boundaries, no-floating-promises and noUncheckedIndexedAccess. Architecture and functional style are checked automatically.</li>
-<li>DRY: generic list/CRUD types and hooks for filtering (300 ms debounce), sorting and pagination through PostgREST. TanStack Query cache: 30-second stale time, previous data during transitions and mutation invalidation; fixed ordering for financial ledgers.</li>
-<li>200+ Vitest tests, 8 E2E tests, 12 pgTAP files and 15 Storybook/a11y files; 7 CI jobs on main.</li>
+<li>CI/CD: GitHub Actions on push and PR to <code>main</code>, 7 jobs (lint, types, <code>tsc</code>, Vitest, deploy) — frontend on GitHub Pages, backend on Supabase; local loop via <code>Makefile</code>.</li>
+<li>Backend: Supabase (Postgres + PostgREST): 7 tables, 12 foreign keys, 7 enum types, 12 CHECK/UNIQUE constraints, 13 functions, 15 triggers, 30 RLS policies. <code>user_role</code> claim from <code>custom_access_token_hook</code>; admin/landlord/tenant roles; 10 <code>security_invoker</code> views (balances and statements on window functions); typed API <code>createClient&lt;Database&gt;</code>.</li>
+<li>Frontend: React 18 + Vite, TanStack Router (hash history) and Query; layered pages → masterComponents → slaveComponents with a domain-free <code>generic/</code>. List/CRUD hooks: 300 ms debounce, sorting, PostgREST pagination (<code>.range()</code>, 20 rows); cache <code>staleTime</code> 30 s, invalidation after mutations.</li>
+<li>LLM: rules from <code>AGENTS.md</code> enforced by ESLint (<code>functional/*</code>, no <code>if</code>/<code>switch</code>/<code>enum</code>/<code>let</code>/<code>throw</code>, import boundaries, <code>no-floating-promises</code>) and strict TS (<code>noUncheckedIndexedAccess</code>).</li>
+<li>245 Vitest tests (29 files), 8 E2E, 13 pgTAP, 15 Storybook (21 <code>play</code>, a11y).</li>
 </ul>
 </article>
 
 <article class="project">
-<h3>pkg-builder — software-building system driven entirely by an LLM agent</h3>
+<h3>pkg-builder — source-to-software build system driven by an LLM agent</h3>
 <p class="project-meta"><em>2026</em> · AGENTS.md · LLM agents · spec-driven development · DAG · <span class="project-links"><a href="https://github.com/PatrykJaseniuk/pkg-builder/blob/main/AGENTS.md">AGENTS.md</a></span></p>
 <ul>
-<li>Designed AGENTS.md as a self-sufficient contract: from an empty directory, an LLM agent recreates the workspace, generates the scripts and independently takes software from source code to a working application.</li>
-<li><strong>Iterative dependency-hell resolution:</strong> the agent diagnoses missing requirements, recursively selects system dependencies or builds them from source, and repeats the process until compilation and launch both succeed.</li>
+<li>The agent is defined entirely in <code>AGENTS.md</code>; it writes only inside <code>functions/</code>, while package artifacts (<code>values/</code>) are read-only.</li>
+<li>Layers 0-repogit → 1-source → 2-build produce artifacts, and 3-launch launches the process.</li>
+<li>Recursive builds: missing dependency → install → next layers, until the right configuration and complete dependency set are found.</li>
 </ul>
 </article>
 
 <article class="project">
 <h3>sailing-sim — physics engine and 2D sailing simulator</h3>
-<p class="project-meta"><em>2022–2024</em> · TypeScript · Next.js · Three.js · Jest · <span class="project-links"><a href="https://github.com/PatrykJaseniuk/sailing-sim">Code</a> · <a href="https://patrykjaseniuk.github.io/StatkiTSDocs/">Live</a></span></p>
+<p class="project-meta"><em>2022–2024</em> · math · physics · TypeScript · Next.js · Three.js · Jest · <span class="project-links"><a href="https://github.com/PatrykJaseniuk/sailing-sim">Code</a> · <a href="https://patrykjaseniuk.github.io/StatkiTSDocs/">Live</a></span></p>
 <ul>
 <li>Implemented a custom soft-body dynamics model: springs, aerodynamic and hydrodynamic forces, rotational motion and a fixed integration step. Built the view with Three.js and collision detection with detect-collisions/SAT.</li>
 <li>The model is separated from the view; 13 Jest suites and 13 chapters of technical documentation.</li>

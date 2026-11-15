@@ -12,37 +12,37 @@ patryk.jaseniuk@gmail.com
 
 Fullstack TypeScript Developer: React, Next.js, Astro oraz PostgreSQL/Supabase. Ulubiony paradygmat programowania: funkcyjny — niemutowalność, kompozycja funkcji i kontrolowane efekty uboczne. Od 2022 roku buduję aplikacje end-to-end z testami i CI/CD; z agentami LLM pracuję spec-driven, weryfikując zmiany typowaniem i testami.
 
-## Doświadczenie
+## Wybrane projekty własne
 
-### Frontend Developer (Astro / TypeScript) — komercyjna strona i cennik dla siłowni
+### parys — strona web i materiały drukowane dla siłowni generowane z jednego źródła
 
-*2026* · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · [Wdrożenie](https://parys.nysa.pl) · [Kod](https://github.com/PatrykJaseniuk/parys-web)
+*2026* · Projekt komercyjny · Astro 5 · TypeScript · Tailwind CSS 4 · Pages CMS · GitHub Actions · [Wdrożenie](https://parys.nysa.pl) · [Kod](https://github.com/PatrykJaseniuk/parys-web)
 
-- We współpracy z właścicielem zaprojektowałem i wdrożyłem statyczną stronę siłowni oraz cennik A4 w PDF i HTML. Publikacja na GitHub Pages pod własną domeną.
-- Zdefiniowałem ustrukturyzowany model biznesowy jako jedyne źródło prawdy: strefy, karnety, zajęcia, trenerzy i usługi są opisane raz, a strona i materiały drukowane powstają z tego samego modelu.
-- CMS Git/JSON bez bazy, backendu i kosztów ich utrzymania; walidacja w CI. Lighthouse: 100/100/100/100.
+- Zdefiniowano ustrukturyzowany model biznesowy jako jedyne źródło prawdy: strefy, karnety, zajęcia, trenerzy i usługi zapisane w JSON; strona i materiały drukowane generowane z tego modelu.
+- Edycja danych przez Pages CMS — CMS oparty na gicie i GitHub Actions.
+- Bez serwera: w pełni statyczna, lekka i szybka strona; zerowe koszty utrzymania; walidacja w CI. Lighthouse: 100/100/100/100.
 
-## Projekty własne
-
-### ts-fullstack-template — szablon aplikacji React + Supabase
+### ts-fullstack-template — aplikacja fullstack w domenie biznesowej: zarządzanie najmem nieruchomości
 
 *2026* · React 18 · TypeScript · TanStack Router/Query · PostgreSQL RLS · Vitest · Playwright · [Wdrożenie](https://patrykjaseniuk.github.io/ts-fullstack-template/) · [Kod](https://github.com/PatrykJaseniuk/ts-fullstack-template)
 
-- Typowane API Supabase/PostgREST: `createClient<Database>`, generowane typy tabel, widoków, Insert/Update i ENUMów. RBAC: 30 polityk RLS, role admin/landlord/tenant i claim JWT; 10 widoków `security_invoker`, m.in. salda na funkcjach okna.
-- Zasady dla agentów LLM z `AGENTS.md` są egzekwowane przez ESLint i strict TS: `functional/*`, granice importów, `no-floating-promises` i `noUncheckedIndexedAccess`. Architektura i styl funkcyjny są kontrolowane automatycznie.
-- DRY: generyczne typy i hooki list/CRUD dla filtrowania (debounce 300 ms), sortowania i paginacji po stronie PostgREST. Cache TanStack Query: staleTime 30 s, poprzednie dane przy zmianach i invalidacja po mutacjach; stały porządek rejestrów finansowych.
-- Ponad 200 testów Vitest, 8 E2E, 12 plików pgTAP i 15 plików Storybook/a11y; 7 zadań CI na main.
+- CI/CD: GitHub Actions na push i PR do `main`, 7 zadań (lint, typy, `tsc`, Vitest, deploy) — frontend na GitHub Pages, backend na Supabase; lokalny cykl przez `Makefile`.
+- Backend: Supabase (Postgres + PostgREST): 7 tabel, 12 kluczy obcych, 7 typów ENUM, 12 ograniczeń CHECK/UNIQUE, 13 funkcji, 15 triggerów, 30 polityk RLS. Claim `user_role` z `custom_access_token_hook`; role admin/landlord/tenant; 10 widoków `security_invoker` (salda i wyciągi na funkcjach okna); typowane API `createClient<Database>`.
+- Frontend: React 18 + Vite, TanStack Router (hash history) i Query; warstwy pages → masterComponents → slaveComponents z bezdomenowym `generic/`. Hooki list/CRUD: debounce 300 ms, sortowanie, paginacja PostgREST (`.range()`, 20 wierszy); cache `staleTime` 30 s, invalidacja po mutacjach.
+- LLM: reguły z `AGENTS.md` egzekwowane przez ESLint (`functional/*`, zakaz `if`/`switch`/`enum`/`let`/`throw`, granice importów, `no-floating-promises`) i strict TS (`noUncheckedIndexedAccess`).
+- 245 testów Vitest (29 plików), 8 E2E, 13 pgTAP, 15 Storybook (21 `play`, a11y).
 
-### pkg-builder — system budowania oprogramowania oparty na agencie LLM
+### pkg-builder — system budowania oprogramowania z kodu źródłowego oparty na agencie LLM
 
 *2026* · AGENTS.md · agenci LLM · spec-driven development · DAG · [AGENTS.md](https://github.com/PatrykJaseniuk/pkg-builder/blob/main/AGENTS.md)
 
-- Opracowałem `AGENTS.md` jako samowystarczalny kontrakt: agent LLM od pustego katalogu odtwarza środowisko, generuje skrypty i samodzielnie prowadzi oprogramowanie od źródeł do działającego programu.
-- **Iteracyjne rozwiązywanie dependency hell:** agent diagnozuje braki, rekurencyjnie dobiera zależności systemowe lub buduje je ze źródeł i powtarza proces aż do pomyślnej kompilacji i uruchomienia.
+- Agent zdefiniowany w całości w `AGENTS.md`; pisze wyłącznie w `functions/`, a artefakty pakietu (`values/`) są tylko do odczytu.
+- Warstwy 0-repogit → 1-source → 2-build generują artefakty, a 3-launch uruchamia proces.
+- Budowa rekurencyjna: brakująca zależność → instalacja → kolejne warstwy, aż do właściwej konfiguracji i kompletu zależności.
 
 ### sailing-sim — silnik fizyki i symulator żaglowca 2D
 
-*2022–2024* · TypeScript · Next.js · Three.js · Jest · [Kod](https://github.com/PatrykJaseniuk/sailing-sim) · [Wdrożenie](https://patrykjaseniuk.github.io/StatkiTSDocs/)
+*2022–2024* · matematyka · fizyka · TypeScript · Next.js · Three.js · Jest · [Kod](https://github.com/PatrykJaseniuk/sailing-sim) · [Wdrożenie](https://patrykjaseniuk.github.io/StatkiTSDocs/)
 
 - Zaimplementowałem własny model dynamiki soft-body: sprężyny, siły aerodynamiczne i hydrodynamiczne, ruch obrotowy oraz stały krok całkowania. Widok oparłem na Three.js, a detekcję kolizji na detect-collisions/SAT.
 - Model jest oddzielony od widoku; 13 zestawów Jest i 13 rozdziałów dokumentacji technicznej.
